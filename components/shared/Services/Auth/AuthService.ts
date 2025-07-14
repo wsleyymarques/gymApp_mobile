@@ -1,5 +1,3 @@
-// src/services/userService.ts
-
 import instance from '../index';
 
 export interface User {
@@ -9,11 +7,11 @@ export interface User {
 }
 
 export interface LoginResponse {
-  user: User
-  token?: string
+  user: User;
+  token?: string;
 }
 
-const baseUrl = 'v1/users'
+const baseUrl = 'v1/users';
 
 export const UserService = {
   async create(name: string, email: string, password: string): Promise<User> {
@@ -28,7 +26,7 @@ export const UserService = {
 
   async createWithGoogle(token: string): Promise<User> {
     try {
-      const response = await instance.post('/users/google', { token });
+      const response = await instance.post(`${baseUrl}/google`, { token });
       return response.data;
     } catch (error) {
       console.error('Error creating user with Google:', error);
@@ -38,7 +36,7 @@ export const UserService = {
 
   async login(email: string, password: string): Promise<LoginResponse> {
     try {
-      const response = await instance.post('/users/login', { email, password });
+      const response = await instance.post(`${baseUrl}/login`, { email, password });
       return response.data;
     } catch (error) {
       console.error('Login error:', error);
@@ -48,7 +46,7 @@ export const UserService = {
 
   async loginWithGoogle(token: string): Promise<User> {
     try {
-      const response = await instance.post('/users/login/google', { token });
+      const response = await instance.post(`${baseUrl}/login/google`, { token });
       return response.data;
     } catch (error) {
       console.error('Google login error:', error);
@@ -66,7 +64,7 @@ export const UserService = {
 
   async getAll(): Promise<User[]> {
     try {
-      const response = await instance.get('/users');
+      const response = await instance.get(baseUrl);
       return response.data;
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -76,7 +74,7 @@ export const UserService = {
 
   async getById(id: number): Promise<User> {
     try {
-      const response = await instance.get(`/users/${id}`);
+      const response = await instance.get(`${baseUrl}/${id}`);
       return response.data;
     } catch (error) {
       console.error('Error fetching user:', error);
@@ -86,7 +84,7 @@ export const UserService = {
 
   async changePassword(id: number, currentPassword: string, newPassword: string): Promise<void> {
     try {
-      await instance.put(`/users/${id}/password`, { currentPassword, newPassword });
+      await instance.put(`${baseUrl}/${id}/password`, { currentPassword, newPassword });
     } catch (error) {
       console.error('Error changing password:', error);
       throw error;
@@ -95,7 +93,7 @@ export const UserService = {
 
   async changeName(id: number, name: string): Promise<User> {
     try {
-      const response = await instance.put(`/users/${id}/name`, { name });
+      const response = await instance.put(`${baseUrl}/${id}/name`, { name });
       return response.data;
     } catch (error) {
       console.error('Error changing name:', error);

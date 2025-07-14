@@ -42,7 +42,7 @@ export interface AppTheme extends NavigationTheme {
     medium: number
     high: number
   }
-  fonts: typeof fontConfig
+  fonts: any
 }
 
 const darkTheme: AppTheme = {

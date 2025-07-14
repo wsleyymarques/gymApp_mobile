@@ -14,6 +14,7 @@ const Welcome = () => {
   const theme = useTheme();
   const [currentCard, setCurrentCard] = useState<'welcome' | 'login' | 'signup'>('welcome');
   const [cardHeight, setCardHeight] = useState(0);
+
   const scaleAnim = useState(new Animated.Value(1))[0];
   const translateYAnim = useState(new Animated.Value(0))[0];
 
